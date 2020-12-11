@@ -4,6 +4,8 @@ This repository contains a [Terraform][terraform] provider for provisioning reso
 
 # Installation
 
+## Terraform 0.12
+
 We provide binary releases for macOS, Windows and Linux via GitHub releases. In order for Terraform to find the plugin, the appropriate binary must be placed into the Terraform third-party plugin directory, the location of which varies by operating system:
 
 - `%APPDATA%\terraform.d\plugins` on Windows
@@ -13,23 +15,27 @@ Alternatively, the binary can be placed alongside the main `terraform` binary.
 
 On macOS and Linux, you can download the provider using the following commands:
 
-- macOS: `curl -o ~/.terraform.d/plugins/terraform-provider-eventstorecloud -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.4.0/terraform-provider-eventstorecloud_darwin_amd64`
-- Linux: `curl -o ~/.terraform.d/plugins/terraform-provider-eventstorecloud -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.4.0/terraform-provider-eventstorecloud_linux_amd64`
+- macOS: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.0/terraform-provider-eventstorecloud_1.5.0_darwin_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
+- Linux: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.0/terraform-provider-eventstorecloud_1.5.0_linux_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
 
 If you prefer to install from source, use the `make install` target in this repository. You'll need a Go 1.13+
 development environment.
 
-## Terraform 0.13
-In the latest version of terraform they have changed how plugins work. The appropriate binary must now be placed in a folder following the pattern:
+## Terraform 0.13+
+
+Terraform now supports third party modules installed via the plugin registry. Add the following to your terraform module
+configuration.
 
 ```
-$PLUGIN_DIRECTORY/$SOURCEHOSTNAME/$SOURCENAMESPACE/$NAME/$VERSION/$OS_$ARCH/
+terraform {
+  required_providers {
+    eventstorecloud = {
+      source  = "eventstore.com/eventstore/eventstorecloud"
+      version = "1.5.0"
+    }
+  }
+}
 ```
-
-On macOS and Linux, you can download the provider using the following commands:
-
-- macOS: `curl -o ~/.terraform.d/plugins/eventstore.com/eventstore/eventstorecloud/1.4.0/darwin_amd64/terraform-provider-eventstorecloud -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.4.0/terraform-provider-eventstorecloud_darwin_amd64`
-- Linux: `curl -o ~/.terraform.d/plugins/eventstore.com/eventstore/eventstorecloud/1.4.0/linux_amd64 -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.4.0/terraform-provider-eventstorecloud_linux_amd64`
 
 # Provider Configuration
 
@@ -47,20 +53,6 @@ Provider configuration options are:
   instance.
 - `token_store` - (`ESC_TOKEN_STORE` via the environment) - *Optional* - the location on the local filesystem
   of the token cache. This is shared with the Event Store Cloud CLI.
-
-## Terraform 0.13
-Terraform 0.13 no longer automatically picks up plugins from the plugins directory. You have to explicitly define it in the terraform file as follows:
-
-```
-terraform {
-  required_providers {
-    eventstorecloud = {
-      source  = "eventstore.com/eventstore/eventstorecloud"
-      version = "1.4.0"
-    }
-  }
-}
-```
 
 # Resources
 
