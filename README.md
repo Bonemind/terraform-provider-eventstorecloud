@@ -15,8 +15,8 @@ Alternatively, the binary can be placed alongside the main `terraform` binary.
 
 On macOS and Linux, you can download the provider using the following commands:
 
-- macOS: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.0/terraform-provider-eventstorecloud_1.5.0_darwin_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
-- Linux: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.0/terraform-provider-eventstorecloud_1.5.0_linux_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
+- macOS: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.1/terraform-provider-eventstorecloud_1.5.1_darwin_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
+- Linux: `curl -o ./terraform-provider-eventstorecloud.zip -L https://github.com/EventStore/terraform-provider-eventstorecloud/releases/download/v1.5.1/terraform-provider-eventstorecloud_1.5.1_linux_amd64.zip && unzip ./terraform-provider-eventstorecloud.zip && mv ./terraform-provider-eventstorecloud ~/.terraform.d/plugins/terraform-provider-eventstorecloud`
 
 If you prefer to install from source, use the `make install` target in this repository. You'll need a Go 1.13+
 development environment.
@@ -31,7 +31,7 @@ terraform {
   required_providers {
     eventstorecloud = {
       source = "EventStore/eventstorecloud"
-      version = "1.5.0"
+      version = "1.5.1"
     }
   }
 }

@@ -1,3 +1,17 @@
+# 1.5.1 (Jan 26, 2021)
+
+ENHANCEMENTS:
+
+* Add missing server version
+* Add missing instance types
+* Fix ESC_ORG_ID environment variable key
+
+# 1.5.0 (Dec 11, 2020)
+
+ENHANCEMENTS:
+
+* Publish to registry
+
 # 1.4.0 (Dec 9, 2020)
 
 ENHANCEMENTS:

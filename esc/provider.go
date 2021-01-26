@@ -32,7 +32,7 @@ func Provider() terraform.ResourceProvider {
 			"organization_id": {
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("ESC_ORG", ""),
+				DefaultFunc: schema.EnvDefaultFunc("ESC_ORG_ID", ""),
 			},
 
 			"token_store": {
@@ -97,8 +97,8 @@ var slowResourceTimeout = &schema.ResourceTimeout{
 }
 
 var validProviders = []string{"aws", "gcp", "azure"}
-var validServerVersions = []string{"20.6"}
+var validServerVersions = []string{"20.6", "20.10"}
 var validTopologies = []string{"single-node", "three-node-multi-zone"}
-var validInstanceTypes = []string{"F1", "C4"}
+var validInstanceTypes = []string{"F1", "C4", "M8", "M16", "M32", "M64", "M128"}
 var validDiskTypes = []string{"GP2", "SSD", "PREMIUM-SSD-LRS"}
 var validProjectionLevels = []string{"off", "system", "user"}
