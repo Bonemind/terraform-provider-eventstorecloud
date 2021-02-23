@@ -44,7 +44,7 @@ options which may be useful.
 
 Provider configuration options are:
 
-- `token` - (`ESC_TOKEN` via the environment) - *Required* - an access token for Event Store Cloud. Currently this token must be created and displayed with the esc cli tool [esc cli](https://github.com/EventStore/esc). The token id displayed in the cloud console is not a valid token.
+- `token` - (`ESC_TOKEN` via the environment) - *Required* - a refresh token for Event Store Cloud. This token can be created and displayed with the esc cli tool [esc cli](https://github.com/EventStore/esc), or via the "request refresh token" button on the [Authentification Tokens page](https://console.eventstore.cloud/authentication-tokens)  in the console. The token id displayed in the cloud console is not a valid token.
 - `organization_id` - (`ESC_ORG_ID` via the environment) - *Required* - the identifier of the Event Store Cloud
   organization into which to provision resources.
 
