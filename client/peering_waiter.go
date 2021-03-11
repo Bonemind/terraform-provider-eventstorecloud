@@ -25,13 +25,13 @@ func (c *Client) PeeringWaitForState(ctx context.Context, req *WaitForPeeringSta
 			return nil, err
 		}
 
+		if req.State == "deleted" || req.State == "defunct" {
+			return &resp.Peering, nil
+		}
+
 		if resp.Peering.Status != req.State {
 			time.Sleep(5 * time.Second)
 			continue
-		}
-
-		if req.State == "deleted" {
-			return &resp.Peering, nil
 		}
 
 		switch resp.Peering.Provider {

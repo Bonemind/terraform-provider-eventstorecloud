@@ -25,6 +25,10 @@ func (c *Client) ManagedClusterWaitForState(ctx context.Context, req *WaitForMan
 			return err
 		}
 
+		if resp.ManagedCluster.Status == "defunct" {
+			return nil
+		}
+
 		if resp.ManagedCluster.Status != req.State {
 			time.Sleep(5 * time.Second)
 			continue

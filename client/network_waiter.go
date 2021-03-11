@@ -25,6 +25,10 @@ func (c *Client) NetworkWaitForState(ctx context.Context, req *WaitForNetworkSta
 			return err
 		}
 
+		if resp.Network.Status == "defunct" {
+			return nil
+		}
+
 		if resp.Network.Status != req.State {
 			time.Sleep(5 * time.Second)
 			continue
