@@ -3,6 +3,8 @@ package client
 import (
 	"context"
 	"time"
+
+	"github.com/pkg/errors"
 )
 
 type WaitForPeeringStateRequest struct {
@@ -13,6 +15,7 @@ type WaitForPeeringStateRequest struct {
 }
 
 func (c *Client) PeeringWaitForState(ctx context.Context, req *WaitForPeeringStateRequest) (*Peering, error) {
+	start := time.Now()
 	getRequest := &GetPeeringRequest{
 		OrganizationID: req.OrganizationID,
 		ProjectID:      req.ProjectID,
@@ -25,8 +28,17 @@ func (c *Client) PeeringWaitForState(ctx context.Context, req *WaitForPeeringSta
 			return nil, err
 		}
 
-		if req.State == "deleted" || req.State == "defunct" {
+		if req.State == "deleted" {
 			return &resp.Peering, nil
+		}
+
+		if resp.Peering.Status == "defunct" {
+			// Resources in a `defunct` state may not update their status right
+			//away when being destroyed, so wait a bit before failing the operation.
+			elapsed := time.Since(start)
+			if elapsed.Seconds() > 30.0 {
+				return nil, errors.Errorf("Peering entered a defunct state!")
+			}
 		}
 
 		if resp.Peering.Status != req.State {
