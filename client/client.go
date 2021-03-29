@@ -81,7 +81,7 @@ func New(opts *Config) (*Client, error) {
 	}
 
 	return &Client{
-		apiURL:     apiURL,
+		apiURL:       apiURL,
 		audience:   "api.eventstore.cloud",
 		idpURL:     parsedIdentityProviderURL,
 		clientID:   clientID,
