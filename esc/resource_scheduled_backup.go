@@ -12,11 +12,11 @@ import (
 )
 
 func resourceScheduledBackup() *schema.Resource {
+
 	return &schema.Resource{
 		Create: resourceScheduledBackupCreate,
 		Exists: resourceScheduledBackupExists,
 		Read:   resourceScheduledBackupRead,
-		Update: resourceScheduledBackupUpdate,
 		Delete: resourceScheduledBackupDelete,
 
 		Schema: map[string]*schema.Schema{
@@ -69,11 +69,11 @@ func resourceScheduledBackupCreate(d *schema.ResourceData, meta interface{}) err
 		Data: map[string]interface{}{
 			"clusterId":      d.Get("source_cluster_id").(string),
 			"description":    d.Get("backup_description").(string),
-			"maxBackupCount": d.Get("max_backup_count").(int32),
+			"maxBackupCount": d.Get("max_backup_count").(int),
 		},
 		Description: d.Get("description").(string),
 		Schedule:    d.Get("schedule").(string),
-		Type:        d.Get("type").(string),
+		Type:        "ScheduledBackup",
 	}
 
 	resp, err := c.client.CreateJob(context.Background(), c.organizationId, projectId, request)
@@ -106,7 +106,6 @@ func resourceScheduledBackupExists(d *schema.ResourceData, meta interface{}) (bo
 
 func resourceScheduledBackupRead(d *schema.ResourceData, meta interface{}) error {
 	c := meta.(*providerContext)
-
 	projectId := d.Get("project_id").(string)
 	jobId := d.Id()
 
@@ -114,7 +113,6 @@ func resourceScheduledBackupRead(d *schema.ResourceData, meta interface{}) error
 	if err != nil {
 		return err
 	}
-
 	if err := d.Set("description", resp.Job.Description); err != nil {
 		return err
 	}
@@ -130,7 +128,7 @@ func resourceScheduledBackupRead(d *schema.ResourceData, meta interface{}) error
 	if err := d.Set("backup_description", resp.Job.Data["description"]); err != nil {
 		return err
 	}
-	if err := d.Set("max_backup_count", resp.Job.Data["max_backup_count"].(int32)); err != nil {
+	if err := d.Set("max_backup_count", resp.Job.Data["maxBackupCount"]); err != nil {
 		return err
 	}
 

@@ -82,12 +82,12 @@ func New(opts *Config) (*Client, error) {
 
 	return &Client{
 		apiURL:       apiURL,
-		audience:   "api.eventstore.cloud",
-		idpURL:     parsedIdentityProviderURL,
-		clientID:   clientID,
-		tokenStore: tokenStore,
+		audience:     "api.eventstore.cloud",
+		idpURL:       parsedIdentityProviderURL,
+		clientID:     clientID,
+		tokenStore:   tokenStore,
 		refreshToken: opts.RefreshToken,
-		httpClient: cleanhttp.DefaultClient(),
+		httpClient:   cleanhttp.DefaultClient(),
 	}, nil
 }
 

@@ -27,7 +27,7 @@ func (c *Client) CreateJob(ctx context.Context, organizationId string, projectId
 	}
 
 	url := *c.apiURL
-	url.Path = "/organizations/{organizationId}/projects/{projectId}/jobs"
+	url.Path = "/orchestrate/v1/organizations/{organizationId}/projects/{projectId}/jobs"
 	url.Path = strings.Replace(url.Path, "{"+"organizationId"+"}", organizationId, -1)
 	url.Path = strings.Replace(url.Path, "{"+"projectId"+"}", projectId, -1)
 

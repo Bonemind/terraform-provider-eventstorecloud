@@ -47,10 +47,11 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"eventstorecloud_project":         resourceProject(),
-			"eventstorecloud_network":         resourceNetwork(),
-			"eventstorecloud_peering":         resourcePeering(),
-			"eventstorecloud_managed_cluster": resourceManagedCluster(),
+			"eventstorecloud_project":          resourceProject(),
+			"eventstorecloud_network":          resourceNetwork(),
+			"eventstorecloud_peering":          resourcePeering(),
+			"eventstorecloud_managed_cluster":  resourceManagedCluster(),
+			"eventstorecloud_scheduled_backup": resourceScheduledBackup(),
 		},
 
 		ConfigureFunc: providerConfigure,
