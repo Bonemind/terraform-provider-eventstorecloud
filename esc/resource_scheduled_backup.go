@@ -27,7 +27,7 @@ func resourceScheduledBackup() *schema.Resource {
 				Type:        schema.TypeString,
 			},
 			"project_id": {
-				Description: "ID of the project in which the managed cluster exists",
+				Description: "ID of the project in which the backup exists",
 				Required:    true,
 				ForceNew:    true,
 				Type:        schema.TypeString,
@@ -39,13 +39,13 @@ func resourceScheduledBackup() *schema.Resource {
 				Type:        schema.TypeString,
 			},
 			"source_cluster_id": {
-				Description: "the cluster to back up",
+				Description: "the ID of the cluster to back up",
 				Required:    true,
 				ForceNew:    true,
 				Type:        schema.TypeString,
 			},
 			"backup_description": {
-				Description: "The description to give each backup",
+				Description: "backup_description",
 				Required:    true,
 				ForceNew:    true,
 				Type:        schema.TypeString,

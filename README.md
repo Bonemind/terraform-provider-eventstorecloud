@@ -284,6 +284,39 @@ As well as the input arguments, the following properties are exposed:
 - `region` (`string`) - the region in which the cluster was provisioned. This is controlled by the network in which
   the cluster is created.
 
+## Resource `eventstorecloud_scheduled_backup`
+
+Creates a new scheduled backup.
+
+### Example
+
+```hcl
+resource "eventstorecloud_scheduled_backup" "daily" {
+    project_id = eventstorecloud_project.example.id
+    schedule = "0 12 * * */1"
+    description = "Creates a backup once a day at 12:00"
+    
+    source_cluster_id = eventstorecloud_managed_cluster.example.id
+    backup_description = "{cluster} Daily Backup {datetime:RFC3339}"
+    max_backup_count = 3
+}
+```
+
+### Arguments
+
+- `description` - (`string`, Required) - a description of the backup
+- `project_id` - (`string`, Required) - the ID of the project in which the managed cluster should be created
+- `schedule` - (`string`, Required) - Schedule for the backup, defined using restricted subset of cron
+- `source_cluster_id` - (`string`, Required) - the ID of the cluster to back up
+- `backup_description` - (`string`, Required) - a description to give each backup. This can include template parameters, such as the time (for example, "{datetime:RFC3339}")
+- `max_backup_count` - (`int`, Required) - the maximum number of backups to keep for this job
+  
+### Attributes
+
+As well as the input arguments, the following properties are exposed:
+
+- `id` - (`string`) - the ID of the created job. This may change if the job is updated, as doing so will force the job to be recreated.
+
 ## Contributing
 
 The Event Store Cloud Terraform provider is released under the Mozilla Public License version 2, like most Terraform
