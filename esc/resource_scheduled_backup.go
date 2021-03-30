@@ -135,26 +135,6 @@ func resourceScheduledBackupRead(d *schema.ResourceData, meta interface{}) error
 	return nil
 }
 
-func resourceScheduledBackupUpdate(d *schema.ResourceData, meta interface{}) error {
-	c := meta.(*providerContext)
-	projectId := d.Get("project_id").(string)
-	jobId := d.Get("project_id").(string)
-
-	resp, err := c.client.GetJob(context.Background(), c.organizationId, projectId, jobId)
-	if err != nil {
-		return fmt.Errorf("could not retrieve job %q for project %q, so cannot update", jobId, projectId)
-	}
-
-	job := resp.Job
-
-	for _, field := range []string{"description", "project_id", "schedule", "source_cluster_id", "backup_description", "max_backup_count"} {
-		if d.HasChange(field) {
-			return fmt.Errorf("scheduled jobs cannot be updated after being created, so cannot change field %q of Job with ID %q (%s)", field, jobId, job.Description)
-		}
-	}
-	return nil
-}
-
 func resourceScheduledBackupDelete(d *schema.ResourceData, meta interface{}) error {
 	c := meta.(*providerContext)
 
