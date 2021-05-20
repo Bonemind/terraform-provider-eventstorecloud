@@ -269,7 +269,7 @@ resource "eventstorecloud_managed_cluster" "example" {
 - `disk_type` - (`string`, Required) - the type of data disks, which helps determine the performance profile of the
   cluster. Currently `gp2` is the only option.
 - `server_version` - (`string`, Required) - the version of Event Store Server with which the cluster is provisioned.
-  Currently only `20.6` is available.
+  Currently `20.6` and `20.10` are available.
 - `projection_level` - (`string`, Optional) - the mode in which to enable projections. Valid values are `off`, `system`
   and `user`. Defaults to `off`.
 
